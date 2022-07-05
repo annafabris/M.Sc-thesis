@@ -39,3 +39,28 @@ def sentences_from_margot_json(file_name):
             claims_or_evidences.append(sentence['text'])
     f.close()
     return claims_or_evidences
+
+def sentences_from_ECHR_corpus(file_name):
+    """
+    Get the sentences from the ECHR corpus
+
+    Parameters:
+    file_name (str): the name of the file containing the ECHR corpus
+
+    Returns:
+    list: the list of sentences
+    """
+    sentences = {}
+
+    f = open(file_name) 
+    data = json.load(f)
+    for document in data:
+        for clause in document['clauses']:
+            sentences[clause['_id']] = [document['text'][clause['start']:clause['end']], False]
+        for argument in document['arguments']:
+            for premise in argument['premises']:
+                sentences[premise][1] = True
+            sentences[argument['conclusion']][1] = True
+    f.close()
+    echr_dataset = sentences.values()
+    return echr_dataset
