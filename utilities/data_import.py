@@ -1,6 +1,7 @@
 import json
 import nltk
 
+nltk.download('punkt')
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
 def sentences_from_txt(file_name):
