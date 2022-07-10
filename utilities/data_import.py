@@ -37,7 +37,7 @@ def sentences_from_margot_json(file_name):
     data = json.load(f)
     for sentence in data['document']:
         if((sentence['claim_score'] > 0 or sentence['evidence_score'] > 0) and len(sentence['text']) > 7):
-            claims_or_evidences.append(sentence['text'])
+            claims_or_evidences.append((sentence['text'], sentence['claim_score'], sentence['evidence_score']))
     f.close()
     return claims_or_evidences
 
