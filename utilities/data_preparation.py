@@ -19,19 +19,33 @@ def merge_arguments_and_key_points(arguments, key_points, labels):
     return df
 
 
-def download_dataset_split(dataset_split, directory="ArgKP"):
+def download_dataset_split(dataset_split):
     """
-    Read the .csv dataset
+    Read the .csv dataset from its Github repository
 
     Parameters:
     dataset_split (str): the name of the dataset to split ['train', 'test', 'dev']
-    directory (str): the directory where the dataset split is stored
 
     Returns:
     pandas.DataFrame: the dataframe containing the dataset split
 
     """
-    arguments = pd.read_csv(directory + "/arguments_" + dataset_split + ".csv")
-    key_points = pd.read_csv(directory + "/key_points_" + dataset_split + ".csv")
-    labels = pd.read_csv(directory + "/labels_" + dataset_split + ".csv")
+    GITHUB_REPOSITORY_PATH = (
+        "https://raw.githubusercontent.com/IBM/KPA_2021_shared_task/main/kpm_data/"
+    )
+    arguments = pd.read_csv(
+        filepath_or_buffer=GITHUB_REPOSITORY_PATH
+        + "arguments_"
+        + dataset_split
+        + ".csv"
+    )
+    key_points = pd.read_csv(
+        filepath_or_buffer=GITHUB_REPOSITORY_PATH
+        + "key_points_"
+        + dataset_split
+        + ".csv"
+    )
+    labels = pd.read_csv(
+        filepath_or_buffer=GITHUB_REPOSITORY_PATH + "labels_" + dataset_split + ".csv"
+    )
     return arguments, key_points, labels
