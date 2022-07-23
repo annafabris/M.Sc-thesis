@@ -31,21 +31,32 @@ def download_dataset_split(dataset_split):
 
     """
     GITHUB_REPOSITORY_PATH = (
-        "https://raw.githubusercontent.com/IBM/KPA_2021_shared_task/main/kpm_data/"
+        "https://raw.githubusercontent.com/IBM/KPA_2021_shared_task/main/"
     )
+    if dataset_split == "test":
+        GITHUB_REPOSITORY_DIRECTORY = "test_data/"
+    else:
+        GITHUB_REPOSITORY_DIRECTORY = "kpm_data/"
+
     arguments = pd.read_csv(
         filepath_or_buffer=GITHUB_REPOSITORY_PATH
+        + GITHUB_REPOSITORY_DIRECTORY
         + "arguments_"
         + dataset_split
         + ".csv"
     )
     key_points = pd.read_csv(
         filepath_or_buffer=GITHUB_REPOSITORY_PATH
+        + GITHUB_REPOSITORY_DIRECTORY
         + "key_points_"
         + dataset_split
         + ".csv"
     )
     labels = pd.read_csv(
-        filepath_or_buffer=GITHUB_REPOSITORY_PATH + "labels_" + dataset_split + ".csv"
+        filepath_or_buffer=GITHUB_REPOSITORY_PATH
+        + GITHUB_REPOSITORY_DIRECTORY
+        + "labels_"
+        + dataset_split
+        + ".csv"
     )
     return arguments, key_points, labels
