@@ -15,7 +15,7 @@ def merge_arguments_and_key_points(arguments, key_points, labels):
     """
     df = key_points.merge(labels, on="key_point_id")
     df = arguments.merge(df, on=["arg_id", "stance", "topic"])
-    df.drop(columns=["arg_id", "key_point_id"], inplace=True)
+    #df.drop(columns=["arg_id", "key_point_id"], inplace=True)
     return df
 
 
